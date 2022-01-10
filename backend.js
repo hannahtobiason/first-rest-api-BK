@@ -21,6 +21,22 @@ app.get('/users', (req, res) => {
     }
 });
 
+app.get('/users/:id', (req, res) => {
+    const id = req.params.id;
+    let result = findUserByID(id);
+    if (result === undefined || result.length == 0){
+        res.status(404).send('Resource not found.');
+    }
+    else{
+        result = {users_list: result};
+        res.send(result);
+    }
+
+});
+
+function findUserByID(id){
+    return users['users_list'].find((user) => user['id'] === id);
+}
 const findUserByName = (name) => {
     return users['users_list'].filter( (user) => user['name'] === name);
 }
