@@ -40,10 +40,25 @@ app.post('/users', (req, res) => {
     res.status(200).end();
 });
 
+app.delete('/users/:id', (req, res) => {
+    const id = req.params.id;
+    let result = findUserByID(id);
+    if (result === undefined || result.length == 0){
+        res.status(404).send('Resource not found.');
+    }
+    else{
+        const userToDelete = req.body;
+        deleteUser(userToDelete);
+        res.status(200).end();
+    }
+});
+
 function findUserByID(id){
     return users['users_list'].find((user) => user['id'] === id);
 }
-
+function deleteUser(user){
+    users['users_list'].pop(user);
+}
 function addUser(user){
     users['users_list'].push(user);
 }
