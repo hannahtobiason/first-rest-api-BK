@@ -41,7 +41,7 @@ app.get('/users/:id', (req, res) => {
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
     addUser(userToAdd);
-    res.status(200).end();
+    res.status(201).end();
 });
 
 app.delete('/users/:id', (req, res) => {
@@ -61,7 +61,6 @@ function findUserByID(id){
     return users['users_list'].find((user) => user['id'] === id);
 }
 function deleteUser(user){
-    console.log(user);
     let delIndex = users['users_list'].indexOf(user);
 
     users['users_list'].splice(delIndex, 1);
