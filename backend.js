@@ -42,7 +42,8 @@ app.post('/users', (req, res) => {
     const userToAdd = req.body;
     userToAdd.id = generateId();
     addUser(userToAdd);
-    res.status(201).end();
+    res.status(201).send(userToAdd).end();
+
 });
 
 app.delete('/users/:id', (req, res) => {
@@ -54,7 +55,7 @@ app.delete('/users/:id', (req, res) => {
     else{
         const userToDelete = req.body
         deleteUser(result);
-        res.status(200).end();
+        res.status(204).end();
     }
 });
 
