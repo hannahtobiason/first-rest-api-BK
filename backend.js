@@ -40,6 +40,7 @@ app.get('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
+    userToAdd.id = generateId();
     addUser(userToAdd);
     res.status(201).end();
 });
@@ -67,6 +68,10 @@ function deleteUser(user){
 }
 function addUser(user){
     users['users_list'].push(user);
+}
+
+function generateId(){
+    return (Math.floor(Math.random()*900000)+100000).toString();
 }
 
 /*const findUserByName = (name) => {
