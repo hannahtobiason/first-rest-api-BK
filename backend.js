@@ -35,6 +35,18 @@ app.get('/users/:id', async (req, res) => {
     }
 });
 
+
+app.delete('/users/:id', async (req, res) => {
+    const id = req.params.id;
+    let result = await userServices.findUserByIdAndDelete(id);
+    if (result === undefined || result.length == 0){
+        res.status(404).send('Resource not found.');
+    }
+    else{
+        res.status(204).end();
+    }
+});
+
 app.post('/users', async (req, res) => {
     const user = req.body;
     const savedUser = await userServices.addUser(user);
