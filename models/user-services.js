@@ -20,6 +20,9 @@ async function getUsers(name, job){
     else if (job && !name){
         result = await findUserByJob(job);
     }   
+    else if (job && name){
+        result = await findUserNameJob(name, job);
+    }
     return result;  
 }
 
@@ -62,7 +65,7 @@ async function findUserByJob(job){
 }
 
 async function findUserNameJob(name, job){
-    return await userModel.find({'name': name, 'job': job});
+    return await userModel.find({'name':name, 'job':job});
 }
 
 
